@@ -1,18 +1,21 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const userSchema = new mongoose.Schema({
-  steam: { type: String, unique: true },
-  tokens: Array,
+const userSchema = new mongoose.Schema(
+  {
+    steam: { type: String, unique: true },
+    tokens: Array,
 
-  profile: {
-    name: String,
-    gender: String,
-    location: String,
-    website: String,
-    picture: String
-  }
-}, { timestamps: true });
+    profile: {
+      name: String,
+      gender: String,
+      location: String,
+      website: String,
+      picture: String,
+    },
+  },
+  { timestamps: true }
+)
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema)
 
-module.exports = User;
+module.exports = User
