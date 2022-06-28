@@ -1,0 +1,44 @@
+{
+  "name": "nuxt-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "NODE_ENV=production node server.js",
+    "generate": "nuxt generate",
+    "lint:prettier": "prettier --check .",
+    "lint": "npm run lint:prettier",
+    "lintfix": "prettier --write --list-different ."
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
+    "bootstrap": "^4.6.1",
+    "bootstrap-vue": "^2.21.2",
+    "connect-mongo": "^4.6.0",
+    "core-js": "^3.19.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "errorhandler": "^1.5.1",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "lodash": "^4.17.21",
+    "lusca": "^1.7.0",
+    "moment": "^2.29.3",
+    "mongoose": "^6.4.0",
+    "morgan": "^1.10.0",
+    "nuxt": "^2.15.8",
+    "passport": "^0.5.2",
+    "passport-openid": "^0.4.0",
+    "path": "^0.12.7",
+    "vue": "^2.6.14",
+    "vue-server-renderer": "^2.6.14",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^4.46.0"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.5.1"
+  }
+}
