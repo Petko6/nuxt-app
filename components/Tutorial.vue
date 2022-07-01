@@ -11,7 +11,6 @@
       <a
         class="flex justify-center pt-8 sm:pt-0"
         href="http://localhost:8080/auth/steam"
-      
       >
         <svg
           width="218"

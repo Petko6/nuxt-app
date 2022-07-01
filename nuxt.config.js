@@ -1,7 +1,7 @@
+const { session } = require('passport')
+
 module.exports = {
   // Global page headers: https://go.nuxtjs.dev/config-head
-  target: 'server',
-  ssr: true,
   head: {
     title: 'nuxt-app',
     htmlAttrs: {
@@ -16,12 +16,12 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  //dev: process.env.NODE_ENV !== 'production',
+  dev: process.env.NODE_ENV !== 'production',
 
   telemetry: false,
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['@/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -30,18 +30,27 @@ module.exports = {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: ['@nuxt/postcss8'],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/bootstrap
-    'bootstrap-vue/nuxt',
+    '@nuxtjs/axios',
+    // [
+    //   'nuxt-session',
+    //   {
+    //     name: session,
+    //     secret: process.env.SESSION_SECRET,
+    //   },
+    // ],
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
-
-  // serverMiddleware: [
-  //   "~/server/server.js"
-  // ],
+  build: {
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
+    },
+  },
 }

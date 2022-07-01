@@ -2,16 +2,19 @@ const passport = require('passport')
 
 const axios = require('axios')
 const { Strategy: OpenIDStrategy } = require('passport-openid')
+const { Strategy: SteamStrategy } = require('passport-steam')
 const _ = require('lodash')
 const moment = require('moment')
 
 const User = require('../models/User')
 
 passport.serializeUser((user, done) => {
+  console.log('serializing...')
   done(null, user.id)
 })
 
 passport.deserializeUser((id, done) => {
+  console.log('deserializing...')
   User.findById(id, (err, user) => {
     done(err, user)
   })
@@ -66,12 +69,82 @@ passport.use(
           }
           if (existingUser) {
             return done(null, existingUser)
+          } else {
+            axios
+              .get(profileURL)
+              .then(({ data }) => {
+                const profile = data.response.players[0]
+                const user = new User()
+                user.steam = steamId
+                user.tokens.push({ kind: 'steam', accessToken: steamId })
+                user.profile.name = profile.personaname
+                user.profile.picture = profile.avatarmedium
+                user.save((err) => {
+                  done(err, user)
+                })
+              })
+              .catch((err) => {
+                done(err, null)
+              })
           }
         })
       }
     }
   )
 )
+
+// passport.use(
+//   new SteamStrategy(
+//     {
+//       apiKey: process.env.STEAM_KEY,
+//       //returnURL: `${process.env.BASE_URL}/auth/steam/callback`,
+//       returnURL: 'http://localhost:8080/auth/steam/callback',
+//       realm: `${process.env.BASE_URL}/`,
+//       stateless: true,
+//       passReqToCallback: true,
+//     },
+//     function (req, identifier, done) {
+//       const steamId = identifier.match(/\d+$/)[0]
+//       const profileURL = `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.STEAM_KEY}&steamids=${steamId}`
+
+//       if (req.user) {
+//         User.findById(req.user.id, (err, user) => {
+//           if (err) {
+//             return done(err)
+//           }
+//           user.steam = steamId
+//           user.tokens.push({ kind: 'steam', accessToken: steamId })
+//           axios
+//             .get(profileURL)
+//             .then((res) => {
+//               const profile = res.data.response.players[0]
+//               user.profile.name = user.profile.name || profile.personaname
+//               user.profile.picture =
+//                 user.profile.picture || profile.avatarmedium
+//               user.save((err) => {
+//                 done(err, user)
+//               })
+//             })
+//             .catch((err) => {
+//               user.save((err) => {
+//                 done(err, user)
+//               })
+//               done(err, null)
+//             })
+//         })
+//       } else {
+//         User.findOne({ steam: steamId }, (err, existingUser) => {
+//           if (err) {
+//             return done(err)
+//           }
+//           if (existingUser) {
+//             return done(null, existingUser)
+//           }
+//         })
+//       }
+//     }
+//   )
+// )
 
 /**
  * Login Required middleware.
