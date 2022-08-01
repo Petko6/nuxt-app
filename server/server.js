@@ -112,7 +112,7 @@ router.use((req, res, next) => {
 /**
  * Primary app routes.
  */
-router.post('/logout', userController.logout)
+router.get('/logout', userController.logout)
 
 /**
  * API examples routes.
