@@ -11,15 +11,6 @@
       >
         Sign in with Steam
       </a>
-      <!-- <div v-else class="btn-group">
-        <button class="btn btn-wide btn-primary" @click="logout">logout</button>
-        <h1 class="btn">{{ $store.state.authUser.profile.name }}</h1>
-        <img
-          class="avatar rounded-md dropdown dropdown-hover"
-          :src="$store.state.authUser.profile.picture"
-          alt="avatar"
-        />
-      </div> -->
       <div v-else class="dropdown dropdown-hover dropdown-end">
         <label tabindex="0" class="btn btn-square rounded-lg">
           <img
