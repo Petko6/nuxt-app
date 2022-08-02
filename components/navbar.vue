@@ -15,6 +15,11 @@
         <input type="checkbox" id="login-popup" class="modal-toggle" />
         <div class="modal modal-bottom sm:modal-middle">
           <div class="modal-box">
+            <label
+              for="login-popup"
+              class="btn btn-sm btn-square btn-ghost absolute right-2 top-2 text-center"
+              >✕</label
+            >
             <div class="divider font-bold text-lg text-center">Sign in</div>
 
             <a class="btn btn-block btn-primary" href="/auth/steam">
@@ -30,28 +35,36 @@
                 />
               </svg>
             </a>
-            <div class="modal-action">
-              <label for="login-popup" class="btn btn-secondary">Close</label>
-            </div>
+            <div class="modal-action"></div>
           </div>
         </div>
       </div>
       <div v-else class="dropdown dropdown-hover dropdown-end">
-        <label tabindex="0" class="btn btn-square rounded-lg">
-          <img
-            :src="$store.state.authUser.profile.picture"
-            class="rounded-lg"
-          />
-        </label>
+        <img
+          :src="$store.state.authUser.profile.picture"
+          class="rounded-lg self-center btn btn-square btn-outline btn-warning"
+        />
         <ul
           tabindex="0"
           class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
         >
           <li class="menu-title">
-            <span>{{ $store.state.authUser.profile.name }}</span>
+            <span class="">{{ $store.state.authUser.profile.name }}</span>
           </li>
           <li>
-            <a @click="logout" class="bg-accent text-white font-bold">Logout</a>
+            <a @click="logout" class="btn btn-accent text-white font-bold">
+              <svg
+                class="fill-white"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M16 12.771h-3.091c-.542 0-.82-.188-1.055-.513l-1.244-1.674-2.029 2.199 1.008 1.562c.347.548.373.922.373 1.42v4.235h-1.962v-3.981c-.016-1.1-1.695-2.143-2.313-1.253l-1.176 1.659c-.261.372-.706.498-1.139.498h-3.372v-1.906l2.532-.001c.397 0 .741-.14.928-.586l1.126-2.75c.196-.41.46-.782.782-1.102l2.625-2.6-.741-.647c-.223-.195-.521-.277-.812-.227l-2.181.381-.342-1.599 2.992-.571c.561-.107 1.042.075 1.461.462l2.882 2.66c.456.414.924 1.136 1.654 2.215.135.199.323.477.766.477h2.328v1.642zm-2.982-5.042c1.02-.195 1.688-1.182 1.493-2.201-.172-.901-.96-1.528-1.845-1.528-1.186 0-2.07 1.078-1.85 2.234.196 1.021 1.181 1.69 2.202 1.495zm4.982-5.729v15l6 5v-20h-6z"
+                /></svg
+              >Logout</a
+            >
           </li>
         </ul>
       </div>
