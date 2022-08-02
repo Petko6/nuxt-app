@@ -16,7 +16,7 @@ export const actions = {
     }
   },
   async logout({ commit }) {
-    await this.$axios.get('/logout')
+    await this.$axios.post('/logout')
     commit('SET_USER', null)
   },
 }
