@@ -5,7 +5,6 @@ const dotenv = require('dotenv').config({ path: __dirname + '/./../.env' })
  */
 const express = require('express')
 const session = require('express-session')
-const bodyParser = require('body-parser')
 const logger = require('morgan')
 const errorHandler = require('errorhandler')
 const lusca = require('lusca')
@@ -13,7 +12,6 @@ const MongoStore = require('connect-mongo')
 const mongoose = require('mongoose')
 const passport = require('passport')
 const path = require('path')
-const cors = require('cors')
 const flash = require('express-flash')
 const { Nuxt, Builder } = require('nuxt')
 /**
@@ -56,16 +54,20 @@ mongoose.connection.on('error', (err) => {
  * Express configuration.
  */
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 app.use(
   session({
     name: 'session',
     resave: true,
     saveUninitialized: false,
     secret: process.env.SESSION_SECRET,
-    cookie: { maxAge: 1209600000 }, // Two weeks in milliseconds
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    cookie: { maxAge: 86400000 }, // One day in milliseconds
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+      autoRemove: 'interval',
+      autoRemoveInterval: '10',
+    }),
   })
 )
 app.use(passport.initialize())
@@ -112,7 +114,7 @@ router.use((req, res, next) => {
 /**
  * Primary app routes.
  */
-router.get('/logout', userController.logout)
+router.post('/logout', userController.logout)
 
 /**
  * API examples routes.

@@ -15,12 +15,10 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "axios": "^0.27.2",
-    "body-parser": "^1.20.0",
     "bootstrap": "^4.6.1",
     "bootstrap-vue": "^2.21.2",
     "connect-mongo": "^4.6.0",
     "core-js": "^3.19.3",
-    "cors": "^2.8.5",
     "daisyui": "^2.20.0",
     "dotenv": "^16.0.1",
     "errorhandler": "^1.5.1",
