@@ -1,9 +1,10 @@
 <template>
   <div class="navbar bg-base-200">
     <div class="flex-1">
-      <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+      <nuxt-link to="/" class="btn btn-ghost normal-case text-xl"
+        >Název</nuxt-link
+      >
     </div>
-    <h1>{{ $store.state.authUser }}</h1>
     <div class="flex-none">
       <div v-if="!$store.state.authUser">
         <!-- The button to open modal -->
@@ -51,6 +52,15 @@
           <li class="menu-title">
             <span class="">{{ $store.state.authUser.profile.name }}</span>
           </li>
+          <li>
+            <nuxt-link
+              to="/profile"
+              class="btn btn-outline btn-secondary text-white font-bold"
+              href=""
+              >Profile</nuxt-link
+            >
+          </li>
+          <div class="divider"></div>
           <li>
             <a @click="logout" class="btn btn-accent text-white font-bold">
               <svg
