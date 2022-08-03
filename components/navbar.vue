@@ -8,7 +8,9 @@
     <div class="flex-none">
       <div v-if="!$store.state.authUser">
         <!-- The button to open modal -->
-        <label for="login-popup" class="btn modal-button btn-accent font-bold"
+        <label
+          for="login-popup"
+          class="btn modal-button btn-accent btn-wide font-bold"
           >Login</label
         >
 
