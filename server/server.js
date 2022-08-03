@@ -59,7 +59,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(
   session({
     name: 'session',
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     secret: process.env.SESSION_SECRET,
     cookie: { maxAge: 86400000 }, // One day in milliseconds
@@ -68,6 +68,7 @@ app.use(
       autoRemove: 'interval',
       autoRemoveInterval: '10',
     }),
+    unset: 'destroy',
   })
 )
 app.use(passport.initialize())
